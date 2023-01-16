@@ -116,7 +116,7 @@
 						formData.append("files", this.image);
 
 						axios
-							.post("http://192.168.0.132:1337/api/upload", formData)
+							.post("https://loss-bot.onrender.com/api/upload", formData)
 							.then((response) => {
 								const imageId = response.data[0].id;
 								console.log(imageId);
@@ -129,7 +129,7 @@
 									},
 								};
 								axios
-									.post("http://192.168.0.132:1337/api/documents", {
+									.post("https://loss-bot.onrender.com/api/documents", {
 										data: {
 											description: this.description,
 											phone: this.phone,
