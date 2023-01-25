@@ -1,7 +1,6 @@
 require("dotenv").config();
 const { Telegraf } = require("telegraf");
 const axios = require("axios").default;
-
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.start((ctx) =>
@@ -24,9 +23,11 @@ bot.start((ctx) =>
 bot.on("callback_query", async (ctx) => {
 	if (ctx.callbackQuery.data === "yes") {
 		ctx.reply(`تواصل مع الادمن \n \n ${process.env.ADMIN}`);
+		ctx.answerCbQuery();
 	}
 	if (ctx.callbackQuery.data === "btn-1") {
 		ctx.reply("ادخل الاسم الثلاثي لصاحب المستمسك");
+		ctx.answerCbQuery();
 	}
 	if (ctx.callbackQuery.data === "no") {
 		ctx.reply("/start");
