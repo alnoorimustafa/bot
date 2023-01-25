@@ -104,17 +104,26 @@
 						};
 					},
 					async post(e) {
-						console.log(this.name === "" || this.phone === "" || this.previewImage === null);
-						if (this.name === "" || this.phone === "" || this.previewImage === null) {
+						console.log(
+							this.name === "" ||
+								this.phone === "" ||
+								this.previewImage === null
+						);
+						if (
+							this.name === "" ||
+							this.phone === "" ||
+							this.previewImage === null
+						) {
 							this.warning = "يرجى ملء كافة الحقول";
 							return;
 						} else {
 							const formData = new FormData();
 							formData.append("files", this.image);
+							const imageId = null;
 							axios
-								.post("http://192.168.0.102:1337/api/upload", formData)
+								.post("http://65.20.143.109:1337/api/upload", formData)
 								.then((response) => {
-									const imageId = response.data[0].id;
+									imageId = response.data[0].id;
 									console.log(imageId);
 									let body = {
 										data: {
@@ -124,7 +133,7 @@
 										},
 									};
 									axios
-										.post("http://192.168.0.102:1337/api/documents", {
+										.post("http://65.20.143.109:1337/api/documents", {
 											data: {
 												name: this.name,
 												phone: this.phone,
