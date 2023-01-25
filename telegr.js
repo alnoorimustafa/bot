@@ -16,11 +16,12 @@ bot.start((ctx) =>
 				/* Inline buttons. 2 side-by-side */
 				[
 					{ text: "بحث عن مستمسك", callback_data: "btn-1" },
-					{ text: "اضافة مستمسك", callback_data: "btn-2" },
+					{
+						text: "اضافة مستمسك",
+						callback_data: "btn-2",
+						url: "http://192.168.0.102:1337/index.html",
+					},
 				],
-
-				/* Also, we can have URL buttons. */
-				// [{ text: "Open in browser", url: "telegraf.js.org" }],
 			],
 		},
 	})
@@ -47,21 +48,19 @@ bot.command("upload", async (ctx) => {
 bot.on("text", (ctx) => {
 	axios
 		.get(
-			`http://192.168.0.132:1337/api/documents?filters[description][$eq]=${ctx.message.text}`
+			`http://192.168.0.102:1337/api/documents?filters[name][$eq]=${ctx.message.text}`
 		)
 		.then(function (response) {
 			let res = response.data.data;
+			console.log(response.data.data);
 			console.log(response.data.data.length);
 			let results = [];
 			res.forEach((element) => {
 				results.push(
-					element.attributes.description +
+					element.attributes.name +
 						"\n" +
-						"-------------------------" +
 						"\n" +
-						element.attributes.phone +
-						"-------------------------" +
-						"\n"
+						"." 
 				);
 			});
 			console.log(results.length);
